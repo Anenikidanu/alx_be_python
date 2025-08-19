@@ -1,43 +1,45 @@
 # library_system.py
 
-# Base class
 class Book:
-    def init(self, title: str, author: str):
+    def __init__(self, title: str, author: str):
+        """Base class for all books"""
         self.title = title
         self.author = author
 
-    def str(self):
+    def __str__(self):
         return f"Book: {self.title} by {self.author}"
 
 
-# Derived class EBook
 class EBook(Book):
-    def init(self, title: str, author: str, file_size: int):
-        super().init(title, author)  # Call base class constructor
+    def __init__(self, title: str, author: str, file_size: int):
+        """EBook inherits from Book, adds file size in KB"""
+        super().__init__(title, author)
         self.file_size = file_size
 
-    def str(self):
+    def __str__(self):
         return f"EBook: {self.title} by {self.author}, File Size: {self.file_size}KB"
 
 
-# Derived class PrintBook
 class PrintBook(Book):
-    def init(self, title: str, author: str, page_count: int):
-        super().init(title, author)  # Call base class constructor
+    def __init__(self, title: str, author: str, page_count: int):
+        """PrintBook inherits from Book, adds page count"""
+        super().__init__(title, author)
         self.page_count = page_count
 
-    def str(self):
+    def __str__(self):
         return f"PrintBook: {self.title} by {self.author}, Page Count: {self.page_count}"
 
 
-# Composition: Library class
 class Library:
-    def init(self):
-        self.books = []  # Stores Book, EBook, and PrintBook instances
+    def __init__(self):
+        """Library manages a collection of books (composition)"""
+        self.books = []
 
-    def add_book(self, book):
+    def add_book(self, book: Book):
+        """Add a Book, EBook, or PrintBook to the library"""
         self.books.append(book)
 
     def list_books(self):
+        """Print details of all books in the library"""
         for book in self.books:
             print(book)
